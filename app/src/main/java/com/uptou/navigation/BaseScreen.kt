@@ -11,4 +11,5 @@ sealed class BaseScreen(val route: String, val name: String, val icon: ImageVect
     object HomeScreen : BaseScreen("home_screen", "Home", Icons.Default.Home)
     object FavouriteScreen : BaseScreen("favourite_screen", "Favourite", Icons.Default.Favorite)
     object SettingScreen : BaseScreen("setting_screen", "Setting", Icons.Default.AccountCircle)
+    object AddNoteScreen : BaseScreen("add_note_screen", "Add note", Icons.Default.Home)
 }

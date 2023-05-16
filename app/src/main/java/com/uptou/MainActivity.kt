@@ -43,12 +43,14 @@ fun MainUI(
         bottomBar = {
             AppNavigation(
                 modifier = modifier,
-                navController = navController )
+                navController = navController
+            )
         }
-    ) {it ->
+    ) {
         MyAppNavHost(
             modifier = modifier,
             navController = navController,
-            startDestination = BaseScreen.HomeScreen.route)
+            startDestination = BaseScreen.HomeScreen.route
+        )
     }
 }

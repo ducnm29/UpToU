@@ -1,15 +1,16 @@
 package com.uptou.ui
 
 
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.*
+import androidx.compose.material3.NavigationBarDefaults.containerColor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.uptou.navigation.BaseScreen
 
 @Composable
@@ -17,42 +18,33 @@ fun AppNavigation(
     modifier: Modifier,
     navController: NavController) {
     val items = listOf(BaseScreen.HomeScreen, BaseScreen.FavouriteScreen, BaseScreen.SettingScreen)
-//    BottomNavigation(
-//        modifier = modifier
-//    ){
-//        items.forEach {screen ->
-//            BottomNavigationItem(
-//                icon = {
-//                    Icon(
-//                        imageVector = Icons.Default.Home,
-//                        contentDescription = null)
-//
-//                },
-//                label = {
-//                        Text(text = screen.name)
-//                },
-//                selected = true,
-//                onClick = { navController.navigate(screen.route){
-//                    launchSingleTop = true
-//                } })
-//        }
-//    }
-    NavigationBar {
-        items.forEach {screen->
+    var selectedItem = remember { mutableStateOf(0) }
+    NavigationBar(
+        modifier = Modifier,
+        containerColor = containerColor,
+        contentColor = MaterialTheme.colorScheme.contentColorFor(containerColor),
+        tonalElevation = NavigationBarDefaults.Elevation,
+        windowInsets = NavigationBarDefaults.windowInsets,
+    ) {
+        items.forEachIndexed { index, screen ->
             NavigationBarItem(
                 icon = {
                     Icon(
                         imageVector = screen.icon,
                         contentDescription = null)
-
                 },
                 label = {
                     Text(text = screen.name)
                 },
-                selected = true,
+                selected = selectedItem.value == index,
                 onClick = {
+                    selectedItem.value = index
                     navController.navigate(screen.route){
+                        popUpTo(navController.graph.findStartDestination().id){
+                            saveState = true
+                        }
                             launchSingleTop = true
+                            restoreState = true
                     }
                 }
             )
