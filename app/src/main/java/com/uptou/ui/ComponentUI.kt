@@ -1,8 +1,6 @@
 package com.uptou.ui
 
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
 import androidx.compose.material3.NavigationBarDefaults.containerColor
 import androidx.compose.runtime.Composable
@@ -11,7 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import com.uptou.navigation.BaseScreen
+import com.uptou.ui.navigation.BaseScreen
 
 @Composable
 fun AppNavigation(
