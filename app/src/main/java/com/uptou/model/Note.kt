@@ -1,10 +1,11 @@
 package com.uptou.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class Note(
-    var id: String,
+    @PrimaryKey var id: String,
     var username: String,
     var date: String,
     var userNumber: Int,

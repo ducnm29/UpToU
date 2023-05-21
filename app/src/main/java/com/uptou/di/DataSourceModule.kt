@@ -15,9 +15,8 @@ import javax.inject.Singleton
 object DataSourceModule {
     @Singleton
     @Provides
-    fun provideLocalDatabase(@ApplicationContext context: Context) {
+    fun provideLocalDatabase(@ApplicationContext context: Context): LocalDatabase =
         LocalDatabase.getInstance(context)
-    }
 
     @Singleton
     @Provides

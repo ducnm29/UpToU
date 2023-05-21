@@ -2,10 +2,12 @@ package com.uptou.ui.addNote
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
@@ -37,30 +39,48 @@ fun AddNoteUI(
     ) {
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = viewModel.userPaid,
+            onValueChange = { userPaid ->
+                viewModel.setUserPaid(userPaid)
+            },
             label = { Text(text = "User paid") })
 
         Spacer(modifier = Modifier.height(10.dp))
 
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            value = viewModel.userNumber.toString(),
+            onValueChange = { userNumber ->
+                viewModel.setUserNumbers(userNumber)
+            },
             label = { Text(text = "Users number") })
 
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            value = viewModel.total.toString(),
+            onValueChange = { total ->
+                viewModel.setTotal(total)
+            },
             label = { Text(text = "Total") })
 
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = viewModel.food,
+            onValueChange = { food ->
+                viewModel.setFood(food)
+            },
+            label = { Text(text = "Food") })
+        Spacer(modifier = Modifier.height(10.dp))
+
+        OutlinedTextField(
+            value = viewModel.date,
+            onValueChange = { date ->
+                viewModel.setDate(date)
+            },
             label = { Text(text = "Date") })
 
         Spacer(modifier = Modifier.height(20.dp))
