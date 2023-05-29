@@ -1,4 +1,4 @@
-package com.uptou.ui
+package com.uptou.ui.component
 
 
 import androidx.compose.material3.*
@@ -49,3 +49,5 @@ fun AppNavigation(
         }
     }
 }
+
+

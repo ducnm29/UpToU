@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.uptou.ui.navigation.BaseScreen
 import com.uptou.ui.navigation.MyAppNavHost
-import com.uptou.ui.AppNavigation
+import com.uptou.ui.component.AppNavigation
 import com.uptou.ui.theme.UpToUTheme
 import dagger.hilt.android.AndroidEntryPoint
 
