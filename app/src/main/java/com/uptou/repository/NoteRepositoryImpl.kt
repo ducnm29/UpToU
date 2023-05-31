@@ -29,7 +29,7 @@ class NoteRepositoryImpl(
         return noteDAO.getNote(id)
     }
 
-    override suspend fun getAllNoteLocal(): Flow<List<Note>> {
+    override fun getAllNoteLocal(): Flow<List<Note>> {
         return noteDAO.getAllNote()
     }
 

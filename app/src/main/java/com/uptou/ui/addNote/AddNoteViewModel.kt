@@ -1,5 +1,6 @@
 package com.uptou.ui.addNote
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -8,6 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.uptou.model.Note
 import com.uptou.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,6 +26,7 @@ class AddNoteViewModel @Inject constructor(
     private val _isShowDialog = mutableStateOf(false)
     private val _dialogMessage = mutableStateOf("")
     private val _dialogTitle = mutableStateOf("")
+    private val _noteList: MutableStateFlow<List<Note>> = MutableStateFlow(listOf())
     val userPaid: String
         get() = _userPaid.value
     val userNumber: String
@@ -39,6 +43,8 @@ class AddNoteViewModel @Inject constructor(
         get() = _dialogMessage.value
     val dialogTitle: String
         get() = _dialogTitle.value
+    val noteList: StateFlow<List<Note>>
+        get() = _noteList
 
     fun setUserPaid(userPaid: String) {
         _userPaid.value = userPaid
@@ -59,7 +65,7 @@ class AddNoteViewModel @Inject constructor(
             _total.value = total
             total.toFloat()
         } catch (ex: Exception) {
-            _total.value = "0f"
+            _total.value = "0"
             showMessageDialog("Alert dialog","Too much in total !!!")
         }
     }
@@ -88,6 +94,7 @@ class AddNoteViewModel @Inject constructor(
                 viewModelScope.launch {
                     noteRepository.createNewNoteLocal(note)
                 }
+                refreshInputData()
             } else {
                 showMessageDialog("Alert dialog","Data input is invalid!!!")
             }
@@ -103,5 +110,20 @@ class AddNoteViewModel @Inject constructor(
         _isShowDialog.value = true
         _dialogMessage.value = message
         _dialogTitle.value = title
+    }
+    private fun refreshInputData(){
+        _userPaid.value = ""
+        _userNumber.value = ""
+        _total.value = ""
+        _food.value = ""
+        _date.value = ""
+    }
+    fun readAllNotesLocal(){
+        viewModelScope.launch {
+            noteRepository.getAllNoteLocal().collect(){
+                _noteList.value = it
+                Log.e("list note", it.size.toString())
+            }
+        }
     }
 }

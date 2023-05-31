@@ -11,7 +11,7 @@ interface NoteRepository {
     suspend fun updateNote(note: Note)
     // Local
     suspend fun getNoteLocal(id: String): Flow<Note>
-    suspend fun getAllNoteLocal(): Flow<List<Note>>
+    fun getAllNoteLocal(): Flow<List<Note>>
     suspend fun createNewNoteLocal(note: Note)
     suspend fun updateNoteLocal(note: Note)
 }

@@ -39,7 +39,9 @@ fun MyAppNavHost(
 fun NavGraphBuilder.homeGraph(navController: NavHostController) {
     navigation(startDestination = "home", route = BaseScreen.HomeScreen.route) {
         composable("home") {
-            HomeUI(navController = navController)
+            HomeUI(
+                navController = navController,
+                viewModel = hiltViewModel<AddNoteViewModel>())
         }
         composable(BaseScreen.AddNoteScreen.route) {
             AddNoteUI(viewModel = hiltViewModel())
