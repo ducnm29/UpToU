@@ -3,7 +3,9 @@ package com.uptou
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -47,11 +49,13 @@ fun MainUI(
                 navController = navController
             )
         }
-    ) {
-        MyAppNavHost(
-            modifier = modifier,
-            navController = navController,
-            startDestination = BaseScreen.HomeScreen.route
-        )
+    ) {innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            MyAppNavHost(
+                modifier = modifier,
+                navController = navController,
+                startDestination = BaseScreen.HomeScreen.route
+            )
+        }
     }
 }

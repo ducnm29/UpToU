@@ -1,10 +1,10 @@
 package com.uptou.ui.home
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,35 +24,45 @@ fun HomeUI(
     navController: NavHostController,
     viewModel: AddNoteViewModel
 ) {
+    val scrollState = rememberScrollState()
     Column(
-        modifier.fillMaxSize(),
+        modifier
+            .fillMaxWidth()
+            .padding(start = 5.dp, end = 5.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Home")
-        //Spacer(modifier = modifier.size(10.dp))
+        Spacer(modifier = modifier.size(10.dp))
         val noteList = viewModel.noteList.collectAsState().value
         LazyColumn(
-            modifier = Modifier.padding(4.dp)){
-
+            modifier = Modifier
+                .padding(4.dp)
+        ){
             items(noteList){
                 NoteItemUI(note = it)
+                Spacer(modifier = modifier.size(5.dp))
+            }
+            item() {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Button(
+                        onClick = {
+                            navController.navigate(BaseScreen.AddNoteScreen.route)
+                        }) {
+                        Text(text = "Add note")
+                    }
+                    Button(
+                        onClick = {
+                            viewModel.readAllNotesLocal()
+                        }) {
+                        Text(text = "Read all notes")
+                    }
+                }
             }
         }
-        Button(
-            onClick = {
-                navController.navigate(BaseScreen.AddNoteScreen.route)
-            }) {
-            Text(text = "Add note")
-        }
-        Button(
-            onClick = {
-                viewModel.readAllNotesLocal()
-            }) {
-            Text(text = "Read all notes")
-        }
-//        NoteItemUI(
-//            Note(1,"Minh Duc","2023/05/30",2,"Bun Ca'",32000f)
-//        )
-    }
 
+    }
 }

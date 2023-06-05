@@ -52,8 +52,10 @@ class AddNoteViewModel @Inject constructor(
 
     fun setUserNumbers(num: String) {
         try {
-            _userNumber.value = num
-            num.toInt()
+            if(num.isNotEmpty()){
+                _userNumber.value = num
+                num.toInt()
+            }
         } catch (ex: Exception) {
             _userNumber.value = ""
             showMessageDialog("Alert dialog","Too much in users number!!!")
@@ -62,8 +64,10 @@ class AddNoteViewModel @Inject constructor(
 
     fun setTotal(total: String) {
         try {
-            _total.value = total
-            total.toFloat()
+            if(total.trim().isNotEmpty()){
+                _total.value = total
+                total.toFloat()
+            }
         } catch (ex: Exception) {
             _total.value = "0"
             showMessageDialog("Alert dialog","Too much in total !!!")
