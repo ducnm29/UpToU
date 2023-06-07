@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.uptou.model.Note
 import com.uptou.ui.addNote.AddNoteViewModel
+import com.uptou.ui.component.ImageCarousel
 import com.uptou.ui.component.NoteItemUI
 import com.uptou.ui.navigation.BaseScreen
 
@@ -31,8 +32,7 @@ fun HomeUI(
             .padding(start = 5.dp, end = 5.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Home")
-        Spacer(modifier = modifier.size(10.dp))
+        ImageCarousel()
         val noteList = viewModel.noteList.collectAsState().value
         LazyColumn(
             modifier = Modifier
